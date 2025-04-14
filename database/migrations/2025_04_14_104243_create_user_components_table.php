@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('component_id')->nullable();
 
-            $table->unsingedInteger('condition')->default(100);
+            $table->unsignedInteger('condition')->default(100);
             $table->boolean('is_broken')->default(false);
 
             $table->timestamps();
