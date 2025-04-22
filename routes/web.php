@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     // if (auth()->check()) {
-        return Inertia::render('Game/Dashboard', [
+        return Inertia::render('Game/PCBuilder', [
             // 'user' => auth()->user(),
         ]);
     // }
