@@ -30,7 +30,7 @@
 					<div class="flex justify-between items-center">
 						<span v-if="selectedPSU" class="text-white font-medium">750W Modular PSU</span>
 						<span v-else class="text-white/50 italic">Empty Slot</span>
-						<button class="text-sm px-4 py-2 rounded bg-emerald-500 hover:bg-emerald-600 font-semibold">
+						<button class="text-sm px-4 py-2 rounded bg-emerald-500 hover:bg-emerald-600 font-semibold" @click="openInventoryModal('PSU')">
 							{{ selectedPSU ? "Change" : "Install" }}
 						</button>
 					</div>
@@ -42,7 +42,7 @@
 					<div class="flex justify-between items-center">
 						<span v-if="selectedMotherboard" class="text-white font-medium">ASUS TUF Gaming X570</span>
 						<span v-else class="text-white/50 italic">Empty Slot</span>
-						<button class="text-sm px-4 py-2 rounded bg-emerald-500 hover:bg-emerald-600 font-semibold">
+						<button class="text-sm px-4 py-2 rounded bg-emerald-500 hover:bg-emerald-600 font-semibold" @click="openInventoryModal('MB')">
 							{{ selectedMotherboard ? "Change" : "Install" }}
 						</button>
 					</div>
@@ -63,15 +63,52 @@
 				<!-- Add RAM, GPU, Storage... -->
 			</div>
 		</div>
+		<InventoryModal v-if="showModal" :title="modalSlotType" :items="modalInventory" @close="showModal = false" @select="handleEquip" />
 	</GameLayout>
 </template>
 
 <script setup>
-import GameLayout from "@/Layouts/GameLayout.vue";
-import {ref} from "vue";
+	import GameLayout from "@/Layouts/GameLayout.vue";
+	import InventoryModal from "@/Components/InventoryModal.vue";
+	import {ref} from "vue";
 
-// Placeholder logic
-const selectedCase = ref(true);
-const selectedMotherboard = ref(true);
-const selectedPSU = ref(false);
+	const showModal = ref(false);
+	const modalSlotType = ref(null); // e.g. 'GPU'
+	const modalInventory = ref([]); // filtered items
+
+	// Placeholder logic
+	const selectedCase = ref(true);
+	const selectedMotherboard = ref(true);
+	const selectedPSU = ref(false);
+
+	const fakeInventory = {
+		GPU: [
+			{name: "RTX 3080", statLabel: "Hashrate", statValue: "92 MH/s"},
+			{name: "RX 6800", statLabel: "Hashrate", statValue: "80 MH/s"},
+		],
+		CPU: [{name: "Ryzen 7 5800X", statLabel: "Multiplier", statValue: "1.25x"}],
+		MB: [
+			{name: "ASUS 540X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 640X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+			{name: "ASUS 740X", statLabel: "Multiplier", statValue: "1x"},
+		],
+	};
+
+	const openInventoryModal = (slotType) => {
+		modalSlotType.value = slotType;
+		modalInventory.value = fakeInventory[slotType] || [];
+		showModal.value = true;
+	};
+
+	const handleEquip = (item) => {
+		console.log("Equipped:", item);
+		showModal.value = false;
+	};
 </script>
