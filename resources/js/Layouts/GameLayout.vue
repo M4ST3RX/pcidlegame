@@ -1,5 +1,6 @@
 <script setup>
-import {IconLogout} from "@tabler/icons-vue";
+	import {IconLogout} from "@tabler/icons-vue";
+	import {Link} from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -14,10 +15,10 @@ import {IconLogout} from "@tabler/icons-vue";
 					<p class="text-white/50 text-xs uppercase mb-2 pl-1">Computer</p>
 					<ul class="space-y-1">
 						<li>
-							<a href="#" class="block py-2 px-3 rounded hover:bg-white/10">Dashboard</a>
+							<Link href="/" class="block py-2 px-3 rounded hover:bg-white/10">Dashboard</Link>
 						</li>
 						<li>
-							<a href="#" class="block py-2 px-3 rounded hover:bg-white/10">PC Builder</a>
+							<Link href="/pc-builder" class="block py-2 px-3 rounded hover:bg-white/10">PC Builder</Link>
 						</li>
 						<li>
 							<a href="#" class="block py-2 px-3 rounded hover:bg-white/10">Inventory</a>

@@ -15,11 +15,29 @@
 					<div class="flex items-center gap-4">
 						<!-- Icon Placeholder -->
 						<div class="w-10 h-10 bg-white/20 rounded flex items-center justify-center text-sm text-white/60">🧩</div>
+
 						<div>
-							<p class="text-white font-medium">{{ item.name }}</p>
+							<!-- Name + Rarity Tag -->
+							<div class="flex items-center gap-2">
+								<p class="text-white font-medium">{{ item.name }}</p>
+								<span class="text-xs font-semibold uppercase px-2 py-0.5 rounded" :class="item.rarityClass">
+									{{ item.rarity }}
+								</span>
+							</div>
+
+							<!-- Stat -->
 							<p class="text-sm text-white/50">{{ item.statLabel }}: {{ item.statValue }}</p>
+
+							<!-- Quality Bar -->
+							<div class="mt-1">
+								<p class="text-xs text-white/50 mb-0.5">Quality: {{ item.quality }}%</p>
+								<div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+									<div class="h-full" :class="item.qualityColor" :style="{width: item.quality + '%'}"></div>
+								</div>
+							</div>
 						</div>
 					</div>
+
 					<button @click="select(item)" class="px-4 py-2 text-sm font-semibold rounded bg-emerald-500 hover:bg-emerald-600">Install</button>
 				</div>
 			</div>
@@ -32,7 +50,6 @@
 
 <script setup>
 	import {IconX} from "@tabler/icons-vue";
-	import {defineEmits, defineProps} from "vue";
 	defineProps({
 		title: String, // e.g. "GPU"
 		items: Array, // Array of items: [{ name: '', statLabel: '', statValue: '' }]

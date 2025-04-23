@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'view']);
+Route::get('/', [HomeController::class, 'view'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/pc-builder', [ComputerController::class, 'viewBuilder']);
