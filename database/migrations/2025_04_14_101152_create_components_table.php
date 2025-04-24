@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('component_type_id');
-            $table->unsignedBigInteger('rarity_id');
 
             $table->unsignedBigInteger('socket_type_id')->nullable();
             $table->unsignedBigInteger('form_factor_id')->nullable();
